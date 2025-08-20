@@ -15,13 +15,13 @@ const SearchForm: React.FC<SearchFormProps> = ({ initialQuery = '', onSearch }) 
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    onSearch(query);
+    onSearch(query.trim());
   };
 
   return (
     <form className={styles.searchForm} onSubmit={handleSubmit}>
       <input
-        type="text"
+        type="search"
         value={query}
         onChange={handleChange}
         placeholder="What do you want to watch?"

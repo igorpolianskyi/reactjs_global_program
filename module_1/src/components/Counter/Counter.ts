@@ -29,22 +29,26 @@ class Counter extends React.Component<CounterProps, CounterState> {
   };
 
   render(): React.ReactNode {
-    return React.createElement(
+  return React.createElement(
+    'div',
+    { style: { textAlign: 'center' } },
+    React.createElement(
       'div',
-      { style: { textAlign: 'center' } },
-      React.createElement('h1', null, this.state.value),
-      React.createElement(
-        'button',
-        { onClick: this.decrement, style: { margin: '10px' } },
-        '-'
-      ),
-      React.createElement(
-        'button',
-        { onClick: this.increment },
-        '+'
-      )
-    );
-  }
+      { style: { color: '#ffffff' }, 'data-testid': 'counter-value' },
+      this.state.value
+    ),
+    React.createElement(
+      'button',
+      { onClick: this.decrement, style: { margin: '10px' }, 'data-testid': 'decrement-btn' },
+      '-'
+    ),
+    React.createElement(
+      'button',
+      { onClick: this.increment, 'data-testid': 'increment-btn' },
+      '+'
+    )
+  );
+}
 }
 
 export default Counter;
