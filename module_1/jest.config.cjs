@@ -9,6 +9,6 @@ module.exports = {
     '\\.module\\.css$': 'identity-obj-proxy'
   },
   testMatch: [
-    "**/?(*.)+(test).[jt]s?(x)" // тільки файли з `.test.` будуть запускатись
+    "**/?(*.)+(test).[jt]s?(x)"
   ],
 };
