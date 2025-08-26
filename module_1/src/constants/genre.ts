@@ -1,15 +1,3 @@
-export enum Genre {
-  ALL = 'ALL',
-  DOCUMENTARY = 'DOCUMENTARY',
-  COMEDY = 'COMEDY',
-  HORROR = 'HORROR',
-  CRIME = 'CRIME',
-}
+export const GENRES = ['ALL', 'DOCUMENTARY', 'COMEDY', 'HORROR', 'CRIME'] as const;
 
-export const GENRES: Genre[] = [
-  Genre.ALL,
-  Genre.DOCUMENTARY,
-  Genre.COMEDY,
-  Genre.HORROR,
-  Genre.CRIME,
-];
+export const COUNTER_INITIAL_VALUE = 5;

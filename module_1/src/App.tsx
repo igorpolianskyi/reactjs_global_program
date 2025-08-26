@@ -4,12 +4,10 @@ import SearchForm from './components/SearchForm/SearchForm'
 import styles from './App.module.css'
 import { useState } from 'react';
 import GenreSelect from './components/GenreSelect/GenreSelect';
-import { Genre, GENRES } from './constants/genre';
-
-const COUNTER_INITIAL_VALUE = 5;
+import { COUNTER_INITIAL_VALUE, GENRES } from './constants/genre';
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre>(Genre.ALL);
+  const [selectedGenre, setSelectedGenre] = useState<string>(GENRES[0]);
 
   const onSearch = (query: string) => {
     console.log(query)
