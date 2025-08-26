@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest",
-    "wdio": "npm run dev & wdio run ./wdio.conf.js"
+    "test:unit": "jest",
+    "test:e2e": "npm run dev & wdio run ./wdio.conf.js"
   },
   "dependencies": {
     "react-dom": "^18.2.0"

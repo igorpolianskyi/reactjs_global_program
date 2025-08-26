@@ -1,11 +1,13 @@
+import type { Genre } from '../../App';
 import styles from './GenreSelect.module.css';
 import React from 'react';
 
 interface GenreSelectProps {
-  genres: string[];
-  selectedGenre: string;
-  onSelect: (genre: string) => void;
+  genres: Genre[];
+  selectedGenre: Genre;
+  onSelect: (genre: Genre) => void;
 }
+
 
 const GenreSelect: React.FC<GenreSelectProps> = ({ genres, selectedGenre, onSelect }) => {
   return (
