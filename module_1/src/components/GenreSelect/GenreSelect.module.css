@@ -1,0 +1,20 @@
+.genreSelect {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.genreTab {
+  color: #FFFFFF;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  height: 36px;
+  background: none;
+  border: none;
+}
+
+.active {
+  border-bottom: 4px solid #F65261;
+}
