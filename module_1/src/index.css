@@ -8,6 +8,10 @@ body {
   background-color: #f5f5f5;
 }
 
+p, h1, h2, h3 {
+  margin: 0;
+}
+
 *,
 *::before,
 *::after {

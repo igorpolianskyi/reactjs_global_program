@@ -4,14 +4,39 @@ import SearchForm from './components/SearchForm/SearchForm'
 import styles from './App.module.css'
 import { useState } from 'react';
 import GenreSelect from './components/GenreSelect/GenreSelect';
-import { COUNTER_INITIAL_VALUE, GENRES } from './constants/genre';
+import { COUNTER_INITIAL_VALUE, GENRES, SAMPLE_MOVIE_PULP_FICTION } from './constants/constants';
+import MovieTile from './components/MovieTile/MovieTile';
+import MovieDetails from './components/MovieDetails/MovieDetails';
+import type { SortByOption } from './components/SortControl/SortControl';
+import SortControl from './components/SortControl/SortControl';
+
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<string>(GENRES[0]);
+  const [sortBy, setSortBy] = useState<SortByOption>('RELEASE DATE');
 
   const onSearch = (query: string) => {
     console.log(query)
   }
+
+  const handleMovieClick = (name: string) => {
+    console.log('Movie clicked:', name);
+  };
+
+  const handleEdit = (name: string) => {
+    console.log('Edit movie:', name);
+  };
+
+  const handleDelete = (name: string) => {
+    console.log('Delete movie:', name);
+  };
+
+  const onSortChange = (newValue: SortByOption) => {
+    console.log('Sort changed:', newValue);
+    setSortBy(newValue);
+  };
+
+
   
   return (
     <div className={styles.appContainer}>
@@ -22,6 +47,15 @@ function App() {
         selectedGenre={selectedGenre}
         onSelect={setSelectedGenre}
       />
+      <MovieTile
+          movie={SAMPLE_MOVIE_PULP_FICTION}
+          onClick={handleMovieClick}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+      <MovieDetails movie={SAMPLE_MOVIE_PULP_FICTION} />
+
+      <SortControl value={sortBy} onSortChange={onSortChange} />
     </div>
   )
 }

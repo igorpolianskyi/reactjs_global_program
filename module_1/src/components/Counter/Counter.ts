@@ -34,7 +34,7 @@ class Counter extends React.Component<CounterProps, CounterState> {
     { style: { textAlign: 'center' } },
     React.createElement(
       'div',
-      { style: { color: '#ffffff' }, 'data-testid': 'counter-value' },
+      { style: { color: '#ff0000' }, 'data-testid': 'counter-value' },
       this.state.value
     ),
     React.createElement(
