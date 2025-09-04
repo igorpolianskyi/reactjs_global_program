@@ -9,11 +9,15 @@ import MovieTile from './components/MovieTile/MovieTile';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import type { SortByOption } from './components/SortControl/SortControl';
 import SortControl from './components/SortControl/SortControl';
+import { Dialog } from './components/Dialog/Dialog';
+import MovieForm from './components/MovieForm/MovieForm';
+import type { MovieInfo } from './types/movie';
 
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<string>(GENRES[0]);
   const [sortBy, setSortBy] = useState<SortByOption>('RELEASE DATE');
+  const [openModal, setOpenModal] = useState(false);
 
   const onSearch = (query: string) => {
     console.log(query)
@@ -36,6 +40,10 @@ function App() {
     setSortBy(newValue);
   };
 
+  const onFormSubmit = (data: MovieInfo) => {
+    console.log(data);
+  }
+
 
   
   return (
@@ -56,6 +64,11 @@ function App() {
       <MovieDetails movie={SAMPLE_MOVIE_PULP_FICTION} />
 
       <SortControl value={sortBy} onSortChange={onSortChange} />
+      {openModal && (
+        <Dialog title="Modal window" onClose={() => setOpenModal(false)}>
+          <MovieForm onSubmit={onFormSubmit} />
+        </Dialog>
+      )}
     </div>
   )
 }
