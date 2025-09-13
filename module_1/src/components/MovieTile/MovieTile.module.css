@@ -1,0 +1,109 @@
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.image {
+  width: 322px;
+  height: 455px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+  opacity: 70%;
+  color: #FFFFFF;
+}
+
+.year {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+  opacity: 70%;
+  color: #FFFFFF;
+  width: 66px;
+  height: 22px;
+  border: 1px solid #979797;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.genres {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  opacity: 50%;
+  color: #FFFFFF;
+}
+
+.menuButton {
+  top: 12px;
+  right: 12px;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu {
+  width: 190px;
+  height: 111px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #000;
+  border-radius: 6px;
+  padding-top: 30px;
+  padding-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  box-sizing: border-box;
+}
+
+.closeButton {
+  all: unset;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 12px;
+  height: 12px;
+  color: #FFFFFF;
+}
+
+.selectButton {
+  all: unset;
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+  padding-left: 20px;
+  height: 34px;
+}
+.selectButton:hover {
+  background-color: #F65261;
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+  padding-left: 20px;
+}
