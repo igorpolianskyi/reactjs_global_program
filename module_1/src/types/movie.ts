@@ -1,4 +1,5 @@
 export interface MovieInfo {
+  id: number;
   name: string;
   year: number;
   genres: string[];

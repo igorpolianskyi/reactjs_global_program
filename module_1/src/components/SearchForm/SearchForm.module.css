@@ -1,6 +1,9 @@
 .searchForm {
   display: flex;
   gap: 14px;
+  height: 455px;
+  justify-content: center;
+  align-items: center;
 }
 
 .searchInput {
