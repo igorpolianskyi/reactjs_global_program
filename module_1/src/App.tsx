@@ -17,7 +17,7 @@ import type { MovieInfo } from './types/movie';
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<string>(GENRES[0]);
   const [sortBy, setSortBy] = useState<SortByOption>('RELEASE DATE');
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
 
   const onSearch = (query: string) => {
     console.log(query)

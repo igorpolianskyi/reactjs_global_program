@@ -68,18 +68,28 @@ describe('MovieForm', () => {
       description: initialMovie.description,
     });
   });
-it('resets selectedGenres and releaseYear when RESET button is clicked', () => {
-  const onSubmitMock = jest.fn();
-  render(<MovieForm initialMovie={initialMovie} onSubmit={onSubmitMock} />);
+  it('resets selectedGenres and releaseYear when RESET button is clicked', () => {
+    const onSubmitMock = jest.fn();
+    render(<MovieForm initialMovie={initialMovie} onSubmit={onSubmitMock} />);
 
-  const resetButton = screen.getByText('RESET');
-  fireEvent.click(resetButton);
+    const resetButton = screen.getByText('RESET');
+    fireEvent.click(resetButton);
 
 
-  expect(screen.queryByText('Action')).not.toBeInTheDocument();
-  expect(screen.queryByText('Sci-Fi')).not.toBeInTheDocument();
+    expect(screen.queryByText('Action')).not.toBeInTheDocument();
+    expect(screen.queryByText('Sci-Fi')).not.toBeInTheDocument();
 
-  const yearInput = screen.getByPlaceholderText('Select year') as HTMLInputElement;
-  expect(yearInput.value).toBe('');
-});
+    const yearInput = screen.getByPlaceholderText('Select year') as HTMLInputElement;
+    expect(yearInput.value).toBe('');
+  });
+
+  it('does not submit when required fields are empty', () => {
+    const onSubmitMock = jest.fn();
+    render(<MovieForm onSubmit={onSubmitMock} />);
+
+    const submitButton = screen.getByText('SUBMIT');
+    fireEvent.click(submitButton);
+
+    expect(onSubmitMock).not.toHaveBeenCalled();
+  });
 });

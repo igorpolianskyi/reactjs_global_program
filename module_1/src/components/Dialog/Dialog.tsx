@@ -11,7 +11,7 @@ interface DialogProps {
 
 export const Dialog: React.FC<DialogProps> = ({ title, children, onClose }) => {
   return (
-    <Portal node={document.getElementById("portal-root")!}>
+    <Portal node={document.getElementById("portal-root") || document.body}>
       <FocusTrap>
         <div className={styles.backdrop}>
           <div className={styles.dialog}>

@@ -5,13 +5,14 @@ import type { MovieInfo } from "../../types/movie";
 import styles from './MovieForm.module.css';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { selectStyles } from './MovieForm.utils';
 
 interface MovieFormProps {
   initialMovie?: MovieInfo;
   onSubmit: (movie: MovieInfo) => void;
 }
 
-type GenreOption = {
+export type GenreOption = {
   value: string;
   label: string;
 };
@@ -25,11 +26,20 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovie, onSubmit }) => {
     initialMovie?.genres?.map((g) => ({ value: g, label: g })) || []
   );
 
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const rawData = Object.fromEntries(formData.entries());
+
+    if (!releaseYear) {
+      alert("Please select release year");
+      return;
+    }
+
+    if (selectedGenres.length === 0) {
+      alert("Please select at least one genre");
+      return;
+    }
 
     const movieData: MovieInfo = {
       name: rawData.title as string,
@@ -57,7 +67,7 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovie, onSubmit }) => {
   );
 
   return (
-    <form 
+    <form
       className={styles.form}
       onSubmit={handleSubmit}
       data-testid="movie-form"
@@ -86,6 +96,7 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovie, onSubmit }) => {
           dateFormat="yyyy"
           placeholderText="Select year"
           className={styles.input}
+          onKeyDown={(e) => e.preventDefault()}
         />
       </label>
 
@@ -128,38 +139,7 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovie, onSubmit }) => {
           }
           placeholder="Select genres"
           className={styles.select}
-          styles={{
-            control: (base) => ({
-              ...base,
-              background: "#323232",
-              border: "none",
-              padding: "6px",
-              borderRadius: "4px",
-              color: "#FFFFFF",
-              fontSize: "20px",
-              fontWeight: "400",
-            }),
-            menu: (base) => ({
-              ...base,
-              background: "#323232",
-              color: "#FFFFFF",
-            }),
-            multiValue: (base) => ({
-              ...base,
-              background: "#f65261",
-              color: "#FFFFFF",
-            }),
-            multiValueLabel: (base) => ({
-              ...base,
-              color: "#FFFFFF",
-            }),
-            option: (base) => ({
-              ...base,
-              background: "#323232",
-              color: "#FFFFFF",
-              ":hover": { background: "#323232" },
-            }),
-          }}
+          styles={selectStyles}
         />
       </label>
 
