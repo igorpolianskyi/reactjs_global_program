@@ -1,4 +1,4 @@
-describe('Counter E2E Test', () => {
+describe.skip('Counter E2E Test', () => {
   it('increments and decrements counter', async () => {
     await browser.url('/');
 

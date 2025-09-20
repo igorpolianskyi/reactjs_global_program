@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { MovieInfo } from "../types/movie";
+import type { ApiMovie, MovieInfo } from "../types/movie";
 
 interface UseMoviesProps {
   search: string;
@@ -7,17 +7,6 @@ interface UseMoviesProps {
   filter: string;
   sortOrder?: string;
   searchBy?: string;
-}
-
-interface ApiMovie {
-  id: number;
-  title: string;
-  release_date: string;
-  genres: string[];
-  poster_path: string;
-  vote_average: number;
-  runtime: number;
-  overview: string;
 }
 
 export function useMovies({ search, sortBy, filter, sortOrder = 'desc', searchBy = 'title' }: UseMoviesProps) {

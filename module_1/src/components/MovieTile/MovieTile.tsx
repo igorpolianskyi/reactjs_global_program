@@ -33,7 +33,12 @@ const MovieTile: React.FC<MovieTileProps> = ({ movie, onClick, onEdit, onDelete 
   };
 
   return (
-    <div className={styles.tile} onClick={handleClick}>
+    <div 
+      data-testid="movie-tile"
+      data-movie-id={movie.id} 
+      className={styles.tile}
+      onClick={handleClick}
+      >
       <img src={movie.imageUrl} alt={movie.name} className={styles.image} />
       <div className={styles.info}>
         <h3 className={styles.name}>{movie.name}</h3>

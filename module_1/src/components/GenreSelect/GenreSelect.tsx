@@ -9,13 +9,13 @@ interface GenreSelectProps {
 
 const GenreSelect: React.FC<GenreSelectProps> = ({ genres, selectedGenre, onSelect }) => {
   return (
-    <div className={styles.genreSelect}>
+    <div className={styles.genreSelect} data-testid="genre-select">
       {genres.map((genre) => (
         <button
+          data-testid={`genre-${genre}`}
           key={genre}
-          className={`${styles.genreTab} ${
-            genre === selectedGenre ? styles.active : ''
-          }`}
+          className={`${styles.genreTab} ${genre === selectedGenre ? styles.active : ''
+            }`}
           onClick={() => onSelect(genre)}
         >
           {genre}

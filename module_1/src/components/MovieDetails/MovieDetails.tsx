@@ -12,7 +12,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie }) => {
   const formatGenres = getFormatGenres(movie.genres);
 
   return (
-    <div className={styles.details}>
+    <div data-testid="movie-details" className={styles.details}>
       <img src={movie.imageUrl} alt={movie.name} className={styles.image} />
       <div className={styles.info}>
         <div className={styles.detailsContainer}>
