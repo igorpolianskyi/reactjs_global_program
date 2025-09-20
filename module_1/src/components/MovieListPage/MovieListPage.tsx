@@ -16,7 +16,7 @@ const MovieListPage: React.FC = () => {
   const [activeGenre, setActiveGenre] = useState('ALL');
   const [selectedMovie, setSelectedMovie] = useState<MovieInfo | undefined>(undefined);
 
-  const sortString = sortCriterion.toLowerCase().replace(" ", "_");
+  const sortString = sortCriterion.toLowerCase().replaceAll(" ", "_");
 
   const { movieList, loading, error } = useMovies({
     search: searchQuery,
@@ -28,8 +28,8 @@ const MovieListPage: React.FC = () => {
   const onSearch = (query: string) => setSearchQuery(query);
   const onSortChange = (newValue: SortByOption) => setSortCriterion(newValue);
 
-  const handleMovieClick = (name: string) => {
-    const movieInfo = movieList.find(movie => movie.name === name);
+  const handleMovieClick = (id: number) => {
+    const movieInfo = movieList.find(movie => movie.id === id);
     setSelectedMovie(movieInfo);
   };
 
@@ -38,13 +38,13 @@ const MovieListPage: React.FC = () => {
       <div className={styles.movieListHeader}>
         <span className={styles.logo}>netflixroulette</span>
         {selectedMovie && (
-          <button 
-          className={styles.searchButton}
-          onClick={() => {
-            setSelectedMovie(undefined);
-        }}>
-          <FaSearch />
-        </button>
+          <button
+            className={styles.searchButton}
+            onClick={() => {
+              setSelectedMovie(undefined);
+            }}>
+            <FaSearch />
+          </button>
         )}
       </div>
       {selectedMovie ? (
@@ -63,11 +63,8 @@ const MovieListPage: React.FC = () => {
         <SortControl value={sortCriterion} onSortChange={onSortChange} />
       </div>
 
-
-
       {loading && <p>Loading movies...</p>}
       {error && <p>{error}</p>}
-
 
       <div className={styles.movieListGrid}>
         {Array.isArray(movieList) &&
