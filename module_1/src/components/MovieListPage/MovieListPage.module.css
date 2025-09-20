@@ -1,0 +1,37 @@
+.movieListPage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+}
+
+.movieListBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.movieListGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.movieListHeader {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+}
+
+.logo {
+    color: #F65261;
+    font-weight: 600;
+}
+
+.searchButton {
+  width: 40px;
+  background: none;
+  border: none;
+  color: #F65261;
+  font-size: 24px;
+  cursor: pointer;
+}
