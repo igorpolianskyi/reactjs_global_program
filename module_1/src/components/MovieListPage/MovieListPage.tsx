@@ -41,16 +41,34 @@ const MovieListPage: React.FC = () => {
     });
   }
 
+  const addMovieButtonClick = () => {
+    navigate({
+      pathname: `/new`,
+      search: createSearchParams(Object.fromEntries(searchParams)).toString(),
+    });
+  }
+
+  const handleEditMovie = (id: number) => {
+    navigate(`/movie/${id}/edit`);
+  };
+
   return (
     <div className={styles.movieListPage}>
       <div className={styles.movieListHeader}>
         <span className={styles.logo}>netflixroulette</span>
-        {movieId && (
+        {movieId ? (
           <button
             data-testid="search-button"
             className={styles.searchButton}
             onClick={searchButtonClick}>
             <FaSearch />
+          </button>
+        ) : (
+          <button
+            data-testid="add-movie-button"
+            className={styles.addMovieButton}
+            onClick={addMovieButtonClick}>
+            + ADD MOVIE
           </button>
         )}
       </div>
@@ -77,7 +95,7 @@ const MovieListPage: React.FC = () => {
               key={movie.id}
               movie={movie}
               onClick={handleMovieClick}
-              onEdit={console.log}
+              onEdit={handleEditMovie}
               onDelete={console.log}
             />
           ))}

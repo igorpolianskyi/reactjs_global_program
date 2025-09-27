@@ -7,6 +7,10 @@ export interface MovieInfo {
   rating: number;
   duration: string;
   description: string;
+  tagline?: string;
+  budget?: number;
+  revenue?: number;
+  vote_count?: number;
 }
 
 export interface ApiMovie {
@@ -18,4 +22,8 @@ export interface ApiMovie {
   vote_average: number;
   runtime: number;
   overview: string;
+  tagline?: string;
+  budget?: number;
+  revenue?: number;
+  vote_count?: number;
 }
