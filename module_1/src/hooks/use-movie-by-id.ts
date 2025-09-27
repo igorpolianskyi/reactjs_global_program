@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { ApiMovie, MovieInfo } from "../types/movie";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export function useMovieById(id: string | number) {
   const [movie, setMovie] = useState<MovieInfo | null>(null);
@@ -16,7 +17,7 @@ export function useMovieById(id: string | number) {
       setError(null);
 
       try {
-        const response = await fetch(`http://localhost:4000/movies/${id}`, {
+        const response = await fetch(`${API_URL}/movies/${id}`, {
           signal: controller.signal,
         });
 

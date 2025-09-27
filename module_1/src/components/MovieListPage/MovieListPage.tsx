@@ -29,7 +29,7 @@ const MovieListPage: React.FC = () => {
   const onGenreChange = (newGenre: string) => updateParams({ genre: newGenre });
   const handleMovieClick = (id: number) => {
     navigate({
-      pathname: `/${id}`,
+      pathname: `/movie/${id}`,
       search: createSearchParams(Object.fromEntries(searchParams)).toString()
     });
   };
