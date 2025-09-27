@@ -1,66 +1,70 @@
-import { useState } from 'react';
 import styles from './MovieListPage.module.css';
-import type { MovieInfo } from '../../types/movie';
-import SearchForm from '../SearchForm/SearchForm';
-import MovieDetails from '../MovieDetails/MovieDetails';
 import GenreSelect from '../GenreSelect/GenreSelect';
 import { GENRES } from '../../constants/constants';
 import SortControl, { type SortByOption } from '../SortControl/SortControl';
 import MovieTile from '../MovieTile/MovieTile';
 import { useMovies } from '../../hooks/use-movies';
 import { FaSearch } from 'react-icons/fa';
+import { useUpdateSearchParams } from '../../hooks/use-update-search-params';
+import { createSearchParams, Outlet, useNavigate, useParams } from 'react-router-dom';
 
 const MovieListPage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortCriterion, setSortCriterion] = useState<SortByOption>('RELEASE DATE');
-  const [activeGenre, setActiveGenre] = useState('ALL');
-  const [selectedMovie, setSelectedMovie] = useState<MovieInfo | undefined>(undefined);
+  const { searchParams, updateParams } = useUpdateSearchParams();
+  const navigate = useNavigate();
+  const { movieId } = useParams();
 
-  const sortString = sortCriterion.toLowerCase().replaceAll(" ", "_");
+  const query = searchParams.get("query") || "";
+  const sortBy = (searchParams.get("sortBy") || "RELEASE DATE").toUpperCase() as SortByOption;
+  const genre = (searchParams.get("genre") || "ALL").toUpperCase();
+  const sortString = sortBy.toLowerCase().replaceAll(" ", "_");
 
   const { movieList, loading, error } = useMovies({
-    search: searchQuery,
+    search: query,
     sortBy: sortString,
-    filter: activeGenre && activeGenre !== 'ALL' ? activeGenre : '',
+    filter: genre && genre !== 'ALL' ? genre : '',
     sortOrder: sortString === 'RELEASE DATE' ? 'desc' : 'asc',
   });
 
-  const onSearch = (query: string) => setSearchQuery(query);
-  const onSortChange = (newValue: SortByOption) => setSortCriterion(newValue);
-
+  const onSortChange = (newValue: SortByOption) => updateParams({ sortBy: newValue });
+  const onGenreChange = (newGenre: string) => updateParams({ genre: newGenre });
   const handleMovieClick = (id: number) => {
-    const movieInfo = movieList.find(movie => movie.id === id);
-    setSelectedMovie(movieInfo);
+    navigate({
+      pathname: `/movie/${id}`,
+      search: createSearchParams(Object.fromEntries(searchParams)).toString()
+    });
   };
+
+  const searchButtonClick = () => {
+    navigate({
+      pathname: `/`,
+      search: createSearchParams(Object.fromEntries(searchParams)).toString(),
+    });
+  }
 
   return (
     <div className={styles.movieListPage}>
       <div className={styles.movieListHeader}>
         <span className={styles.logo}>netflixroulette</span>
-        {selectedMovie && (
+        {movieId && (
           <button
+            data-testid="search-button"
             className={styles.searchButton}
-            onClick={() => {
-              setSelectedMovie(undefined);
-            }}>
+            onClick={searchButtonClick}>
             <FaSearch />
           </button>
         )}
       </div>
-      {selectedMovie ? (
-        <MovieDetails movie={selectedMovie} />
-      ) : (
-        <SearchForm initialQuery={searchQuery} onSearch={onSearch} />
-      )}
+
+      <Outlet />
 
       <div className={styles.movieListBar}>
         <GenreSelect
           genres={GENRES}
-          selectedGenre={activeGenre}
-          onSelect={setActiveGenre}
+          selectedGenre={genre}
+          onSelect={onGenreChange}
         />
 
-        <SortControl value={sortCriterion} onSortChange={onSortChange} />
+        <SortControl value={sortBy} onSortChange={onSortChange} />
       </div>
 
       {loading && <p>Loading movies...</p>}

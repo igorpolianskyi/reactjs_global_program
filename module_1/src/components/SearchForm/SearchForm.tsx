@@ -22,12 +22,13 @@ const SearchForm: React.FC<SearchFormProps> = ({ initialQuery = '', onSearch }) 
     <form className={styles.searchForm} onSubmit={handleSubmit}>
       <input
         type="search"
+        data-testid="search-input"
         value={query}
         onChange={handleChange}
         placeholder="What do you want to watch?"
         className={styles.searchInput}
       />
-      <button type="submit" className={styles.searchButton}>
+      <button type="submit" data-testid="search-button" className={styles.searchButton}>
         Search
       </button>
     </form>

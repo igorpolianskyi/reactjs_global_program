@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import type { MovieInfo } from "../types/movie";
+import type { ApiMovie, MovieInfo } from "../types/movie";
+const API_URL = import.meta.env.VITE_API_URL;
 
 interface UseMoviesProps {
   search: string;
@@ -7,17 +8,6 @@ interface UseMoviesProps {
   filter: string;
   sortOrder?: string;
   searchBy?: string;
-}
-
-interface ApiMovie {
-  id: number;
-  title: string;
-  release_date: string;
-  genres: string[];
-  poster_path: string;
-  vote_average: number;
-  runtime: number;
-  overview: string;
 }
 
 export function useMovies({ search, sortBy, filter, sortOrder = 'desc', searchBy = 'title' }: UseMoviesProps) {
@@ -41,7 +31,7 @@ export function useMovies({ search, sortBy, filter, sortOrder = 'desc', searchBy
           searchBy
         });
 
-        const response = await fetch(`http://localhost:4000/movies?${params.toString()}`, {
+        const response = await fetch(`${API_URL}/movies?${params.toString()}`, {
           signal: controller.signal
         });
 

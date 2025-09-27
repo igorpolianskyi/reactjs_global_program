@@ -15,10 +15,11 @@ const SortControl: React.FC<SortControlProps> = ({ value, onSortChange }) => {
       <label className={styles.label}>
         SORT BY
         <select
+          data-testid="sort-select"
           value={value}
           className={styles.select}
           onChange={(e) => onSortChange(e.target.value as SortByOption)}
-          
+
         >
           <option className={styles.option} value="RELEASE DATE">RELEASE DATE</option>
           <option className={styles.option} value="TITLE">TITLE</option>

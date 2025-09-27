@@ -8,3 +8,14 @@ export interface MovieInfo {
   duration: string;
   description: string;
 }
+
+export interface ApiMovie {
+  id: number;
+  title: string;
+  release_date: string;
+  genres: string[];
+  poster_path: string;
+  vote_average: number;
+  runtime: number;
+  overview: string;
+}

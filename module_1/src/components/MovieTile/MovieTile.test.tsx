@@ -1,11 +1,13 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import MovieTile from './MovieTile';
 import { getFormatGenres } from '../../utils/get-format-genres';
 import type { MovieInfo } from '../../types/movie';
 
 describe('MovieTile component', () => {
   const movie: MovieInfo = {
+    id: 1,
     name: 'Inception',
     year: 2010,
     genres: ['Action', 'Sci-Fi'],
@@ -18,49 +20,51 @@ describe('MovieTile component', () => {
   it('renders movie details correctly', () => {
     render(<MovieTile movie={movie} />);
 
-    expect(screen.getByText('Inception')).toBeInTheDocument();
-    expect(screen.getByText('2010')).toBeInTheDocument();
+    expect(screen.getByText(movie.name)).toBeInTheDocument();
+    expect(screen.getByText(movie.year.toString())).toBeInTheDocument();
     expect(screen.getByText(getFormatGenres(movie.genres))).toBeInTheDocument();
-    expect(screen.getByAltText('Inception')).toHaveAttribute('src', 'inception.jpg');
+    expect(screen.getByAltText(movie.name)).toHaveAttribute('src', movie.imageUrl);
   });
 
-  it('calls onClick when tile is clicked', () => {
+  it('calls onClick when tile is clicked', async () => {
     const onClickMock = jest.fn();
     render(<MovieTile movie={movie} onClick={onClickMock} />);
-
-    fireEvent.click(screen.getByText('Inception'));
-    expect(onClickMock).toHaveBeenCalledWith('Inception');
+    
+    await userEvent.click(screen.getByTestId('movie-tile'));
+    expect(onClickMock).toHaveBeenCalledWith(movie.id);
   });
 
-  it('opens and closes the menu when menu button is clicked', () => {
+  it('opens and closes the menu when menu button is clicked', async () => {
     render(<MovieTile movie={movie} />);
 
-    fireEvent.click(screen.getByText('⋮'));
+    // Відкрити меню
+    await userEvent.click(screen.getByText('⋮'));
     expect(screen.getByText('Edit')).toBeInTheDocument();
     expect(screen.getByText('Delete')).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText('✕'));
+    // Закрити меню
+    await userEvent.click(screen.getByText('✕'));
     expect(screen.queryByText('Edit')).not.toBeInTheDocument();
     expect(screen.queryByText('Delete')).not.toBeInTheDocument();
   });
 
-  it('calls onEdit when Edit button is clicked', () => {
+  it('calls onEdit when Edit button is clicked', async () => {
     const onEditMock = jest.fn();
     render(<MovieTile movie={movie} onEdit={onEditMock} />);
 
-    fireEvent.click(screen.getByText('⋮'));
-    fireEvent.click(screen.getByText('Edit'));
+    await userEvent.click(screen.getByText('⋮'));
+    await userEvent.click(screen.getByText('Edit'));
 
-    expect(onEditMock).toHaveBeenCalledWith('Inception');
+    expect(onEditMock).toHaveBeenCalledWith(movie.name);
   });
 
-  it('calls onDelete when Delete button is clicked', () => {
+  it('calls onDelete when Delete button is clicked', async () => {
     const onDeleteMock = jest.fn();
     render(<MovieTile movie={movie} onDelete={onDeleteMock} />);
 
-    fireEvent.click(screen.getByText('⋮'));
-    fireEvent.click(screen.getByText('Delete'));
+    await userEvent.click(screen.getByText('⋮'));
+    await userEvent.click(screen.getByText('Delete'));
 
-    expect(onDeleteMock).toHaveBeenCalledWith('Inception');
+    expect(onDeleteMock).toHaveBeenCalledWith(movie.name);
   });
 });
