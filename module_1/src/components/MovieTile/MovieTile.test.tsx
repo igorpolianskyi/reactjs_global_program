@@ -49,22 +49,22 @@ describe('MovieTile component', () => {
   });
 
   it('calls onEdit when Edit button is clicked', async () => {
-    const onEditMock = jest.fn();
-    render(<MovieTile movie={movie} onEdit={onEditMock} />);
+  const onEditMock = jest.fn();
+  render(<MovieTile movie={movie} onEdit={onEditMock} />);
 
-    await userEvent.click(screen.getByText('⋮'));
-    await userEvent.click(screen.getByText('Edit'));
+  await userEvent.click(screen.getByText('⋮'));
+  await userEvent.click(screen.getByText('Edit'));
 
-    expect(onEditMock).toHaveBeenCalledWith(movie.name);
-  });
+  expect(onEditMock).toHaveBeenCalledWith(movie.id);  // очікуємо id
+});
 
-  it('calls onDelete when Delete button is clicked', async () => {
-    const onDeleteMock = jest.fn();
-    render(<MovieTile movie={movie} onDelete={onDeleteMock} />);
+it('calls onDelete when Delete button is clicked', async () => {
+  const onDeleteMock = jest.fn();
+  render(<MovieTile movie={movie} onDelete={onDeleteMock} />);
 
-    await userEvent.click(screen.getByText('⋮'));
-    await userEvent.click(screen.getByText('Delete'));
+  await userEvent.click(screen.getByText('⋮'));
+  await userEvent.click(screen.getByText('Delete'));
 
-    expect(onDeleteMock).toHaveBeenCalledWith(movie.name);
-  });
+  expect(onDeleteMock).toHaveBeenCalledWith(movie.name);
+});
 });

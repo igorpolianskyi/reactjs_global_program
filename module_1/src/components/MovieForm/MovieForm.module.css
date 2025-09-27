@@ -90,3 +90,8 @@
   cursor: pointer;
   font-weight: 500;
 }
+
+.error {
+  color: #F65261;
+  font-size: 12px;
+}

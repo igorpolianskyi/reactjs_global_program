@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { useUpdateSearchParams } from "../../hooks/use-update-search-params";
 import SearchForm from "./SearchForm";
 
@@ -7,7 +8,12 @@ const SearchFormWrapper: React.FC = () => {
 
   const onSearch = (query: string) => updateParams({ query });
 
-  return <SearchForm initialQuery={query} onSearch={onSearch} />;
+  return (
+    <>
+      <SearchForm initialQuery={query} onSearch={onSearch} />
+      <Outlet />
+    </>
+  );
 }
 
 export default SearchFormWrapper;

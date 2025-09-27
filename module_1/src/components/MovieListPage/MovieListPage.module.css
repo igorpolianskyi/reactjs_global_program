@@ -39,3 +39,15 @@
   font-size: 24px;
   cursor: pointer;
 }
+
+.addMovieButton {
+  color: #F65261;
+  font-weight: 600;
+  font-size: 20px;
+  height: 46px;
+  width: 177px;
+  background-color: #606060;
+  opacity: 68%;
+  border: none;
+  border-radius: 4px;
+}

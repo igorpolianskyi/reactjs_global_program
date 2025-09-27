@@ -6,7 +6,7 @@ import type { MovieInfo } from '../../types/movie';
 interface MovieTileProps {
   movie: MovieInfo;
   onClick?: (id: number) => void;
-  onEdit?: (name: string) => void;
+  onEdit?: (name: number) => void;
   onDelete?: (name: string) => void;
 }
 
@@ -21,10 +21,9 @@ const MovieTile: React.FC<MovieTileProps> = ({ movie, onClick, onEdit, onDelete 
   };
 
   const handleEdit = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    console.log('handleEdit')
-    onEdit?.(movie.name);
-  };
+  e.stopPropagation();
+  onEdit?.(movie.id);
+};
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
